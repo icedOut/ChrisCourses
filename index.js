@@ -1,3 +1,4 @@
+// https://www.youtube.com/watch?v=4q2vvZn5aoo&ab_channel=ChrisCourses
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
