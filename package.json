@@ -1,0 +1,25 @@
+{
+  "name": "icy2dgame",
+  "version": "1.0.0",
+  "description": "2D game with HTML CAVAS & Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icedOut/ChrisCourses.git"
+  },
+  "keywords": [
+    "Game",
+    "2D",
+    "platform",
+    "javascript"
+  ],
+  "author": "Philippe Chartrand",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icedOut/ChrisCourses/issues"
+  },
+  "homepage": "https://github.com/icedOut/ChrisCourses#readme"
+}
