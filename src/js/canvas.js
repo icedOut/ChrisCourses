@@ -1,4 +1,4 @@
-// https://www.youtube.com/watch?v=4q2vvZn5aoo&ab_channel=ChrisCourses
+// https://www.youtube.com/watch?v=4q2vvZn5aoo&ab_channel=ChrisCourses 1:08
 import platform from '../img/platform.png'
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
