@@ -1,5 +1,7 @@
 // https://www.youtube.com/watch?v=4q2vvZn5aoo&ab_channel=ChrisCourses 1:08
 import platform from '../img/platform.png'
+import hills from '../img/hills.png'
+import background from '../img/background.png'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -83,7 +85,7 @@ function createImage(imageSrc) {
 }
 
 const platformImage = createImage(platform)
-const genericObjects = [new GenericObject({x:0,y:0,image:createImage(platform)}), new GenericObject({x:0,y:0,image:createImage(platform)})]
+const genericObjects = [new GenericObject({x:-1,y:-1,image:createImage(background)}), new GenericObject({x:-1,y:-1,image:createImage(hills)})]
 const player = new Player()
 const platforms = [new Platform({x:-1, y: 470, image:platformImage}), new Platform({x:platformImage.width - 3, y:470, image:platformImage })]
 const keys = {
@@ -119,12 +121,18 @@ function animate() {
             scrollOffset += 5
             platforms.forEach((platform) => {
                 platform.position.x -= 5
+            })
+            genericObjects.forEach(genericObject =>{
+                genericObject.position.x -= 3
             })        
         } else if (keys.left.pressed){
             scrollOffset -= 5
             platforms.forEach((platform) => {
                 platform.position.x += 5
-            })        
+            })
+            genericObjects.forEach(genericObject =>{
+                genericObject.position.x += 3
+            })           
         }
     }
     
