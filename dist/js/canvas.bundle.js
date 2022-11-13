@@ -114,7 +114,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 // https://www.youtube.com/watch?v=4q2vvZn5aoo&ab_channel=ChrisCourses
 
-console.log(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -158,7 +157,8 @@ var Player = /*#__PURE__*/function () {
 var Platform = /*#__PURE__*/function () {
   function Platform(_ref) {
     var x = _ref.x,
-      y = _ref.y;
+      y = _ref.y,
+      image = _ref.image;
     _classCallCheck(this, Platform);
     this.position = {
       x: x,
@@ -166,23 +166,29 @@ var Platform = /*#__PURE__*/function () {
     };
     this.width = 200;
     this.height = 20;
+    this.image = image;
   }
   _createClass(Platform, [{
     key: "draw",
     value: function draw() {
-      c.fillStyle = 'green';
-      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+      c.drawImage(this.image, this.position.x, this.position.y);
     }
   }]);
   return Platform;
 }();
+var image = new Image();
+image.src = _img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"];
+console.log(image);
+console.log(image.src);
 var player = new Player();
 var platforms = [new Platform({
   x: 500,
-  y: 200
+  y: 200,
+  image: image
 }), new Platform({
   x: 400,
-  y: 300
+  y: 300,
+  image: image
 })];
 var keys = {
   right: {

@@ -1,6 +1,5 @@
 // https://www.youtube.com/watch?v=4q2vvZn5aoo&ab_channel=ChrisCourses
 import platform from '../img/platform.png'
-console.log(platform)
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
@@ -45,23 +44,26 @@ class Player {
 }
 
 class Platform {
-    constructor({ x,y }) {
+    constructor({ x,y, image }) {
         this.position = {
             x,
             y
         }
         this.width = 200
         this. height = 20
+        this.image = image
     }
 
     draw() {
-        c.fillStyle= 'green'
-        c.fillRect(this.position.x,this.position.y, this.width, this.height)
+        c.drawImage(this.image, this.position.x, this.position.y)
     }
 }
-
+const image = new Image()
+image.src = platform
+console.log(image)
+console.log(image.src)
 const player = new Player()
-const platforms = [new Platform({x:500, y:200 }), new Platform({x:400, y:300})]
+const platforms = [new Platform({x:500, y:200, image}), new Platform({x:400, y:300, image })]
 const keys = {
     right: {
         pressed: false
