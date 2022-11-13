@@ -1,6 +1,6 @@
 // https://www.youtube.com/watch?v=4q2vvZn5aoo&ab_channel=ChrisCourses
 import platform from './img/platform.png'
-console.log(platform);
+console.log(platform)
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
@@ -26,20 +26,20 @@ class Player {
     draw() {
         c.fillStyle ='red'
         c.fillRect(this.position.x,
-                   this.position.y,
-                   this.width,
-                   this.height
-                   )
+            this.position.y,
+            this.width,
+            this.height
+        )
     }
 
     update() {
-        this.draw(); 
+        this.draw() 
         this.position.y += this.velocity.y
         this.position.x += this.velocity.x
         if (this.position.y + this.height + this.velocity.y <= canvas.height ){
-        this.velocity.y += gravity
+            this.velocity.y += gravity
         }else {
-            this.velocity.y = 0;
+            this.velocity.y = 0
         }
     }
 }
@@ -50,8 +50,8 @@ class Platform {
             x,
             y
         }
-        this.width = 200;
-        this. height = 20;
+        this.width = 200
+        this. height = 20
     }
 
     draw() {
@@ -71,30 +71,30 @@ const keys = {
     }
 }
 
-let scrollOffset = 0;
+let scrollOffset = 0
 
 function animate() {
-    requestAnimationFrame(animate);
-    c.clearRect(0, 0, canvas.width, canvas.height);
-    player.update();
+    requestAnimationFrame(animate)
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    player.update()
     platforms.forEach((platform) => {
-        platform.draw();
+        platform.draw()
     })
 
     if (keys.right.pressed && player.position.x < 400) {
         player.velocity.x = 5
     } else if (keys.left.pressed && player.position.x > 100)  {
-        player.velocity.x = -5;
+        player.velocity.x = -5
     } else {
-        player.velocity.x = 0;
+        player.velocity.x = 0
 
         if(keys.right.pressed){
-            scrollOffset += 5;
+            scrollOffset += 5
             platforms.forEach((platform) => {
                 platform.position.x -= 5
             })        
         } else if (keys.left.pressed){
-            scrollOffset -= 5;
+            scrollOffset -= 5
             platforms.forEach((platform) => {
                 platform.position.x += 5
             })        
@@ -107,53 +107,53 @@ function animate() {
             player.position.y + player.height + player.velocity.y >= platform.position.y &&
             player.position.x + player.width >= platform.position.x &&
             player.position.x <= platform.position.x + platform.width){
-            player.velocity.y = 0;
+            player.velocity.y = 0
         }
     })
 
     if (scrollOffset > 2000) {
-        console.log("you win");
+        console.log('you win')
     }
 }
 
-animate();
+animate()
 
-window.addEventListener("keydown", ({ keyCode }) => {
+window.addEventListener('keydown', ({ keyCode }) => {
     switch(keyCode) {
-        case 65:
-            console.log("left");
-            keys.left.pressed = true
-            break;
-        case 83:
-            console.log("down");
-            break;
-        case 68:
-            console.log("right");
-            keys.right.pressed = true
-            break;
-        case 87:
-            console.log("up");
-            player.velocity.y -= 20;
-            break;
+    case 65:
+        console.log('left')
+        keys.left.pressed = true
+        break
+    case 83:
+        console.log('down')
+        break
+    case 68:
+        console.log('right')
+        keys.right.pressed = true
+        break
+    case 87:
+        console.log('up')
+        player.velocity.y -= 20
+        break
     }
 })
 
-window.addEventListener("keyup", ({ keyCode }) => {
+window.addEventListener('keyup', ({ keyCode }) => {
     switch(keyCode) {
-        case 65:
-            console.log("left");
-            keys.left.pressed = false
-            break;
-        case 83:
-            console.log("down");
-            break;
-        case 68:
-            console.log("right");
-            keys.right.pressed = false
-            break;
-        case 87:
-            console.log("up");
-            player.velocity.y += 20;
-            break;
+    case 65:
+        console.log('left')
+        keys.left.pressed = false
+        break
+    case 83:
+        console.log('down')
+        break
+    case 68:
+        console.log('right')
+        keys.right.pressed = false
+        break
+    case 87:
+        console.log('up')
+        player.velocity.y += 20
+        break
     }
 })
