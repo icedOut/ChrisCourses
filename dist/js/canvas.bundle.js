@@ -116,8 +116,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 1024;
+canvas.height = 576;
 var gravity = 0.25;
 var Player = /*#__PURE__*/function () {
   function Player() {
@@ -164,9 +164,9 @@ var Platform = /*#__PURE__*/function () {
       x: x,
       y: y
     };
-    this.width = 200;
-    this.height = 20;
     this.image = image;
+    this.width = image.width;
+    this.height = image.height;
   }
   _createClass(Platform, [{
     key: "draw",
@@ -176,19 +176,52 @@ var Platform = /*#__PURE__*/function () {
   }]);
   return Platform;
 }();
-var image = new Image();
-image.src = _img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"];
-console.log(image);
-console.log(image.src);
+var GenericObject = /*#__PURE__*/function () {
+  function GenericObject(_ref2) {
+    var x = _ref2.x,
+      y = _ref2.y,
+      image = _ref2.image;
+    _classCallCheck(this, GenericObject);
+    this.position = {
+      x: x,
+      y: y
+    };
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
+  }
+  _createClass(GenericObject, [{
+    key: "draw",
+    value: function draw() {
+      c.drawImage(this.image, this.position.x, this.position.y);
+    }
+  }]);
+  return GenericObject;
+}();
+function createImage(imageSrc) {
+  var image = new Image();
+  image.src = imageSrc;
+  return image;
+}
+var platformImage = createImage(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
+var genericObjects = [new GenericObject({
+  x: 0,
+  y: 0,
+  image: createImage(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"])
+}), new GenericObject({
+  x: 0,
+  y: 0,
+  image: createImage(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"])
+})];
 var player = new Player();
 var platforms = [new Platform({
-  x: 500,
-  y: 200,
-  image: image
+  x: -1,
+  y: 470,
+  image: platformImage
 }), new Platform({
-  x: 400,
-  y: 300,
-  image: image
+  x: platformImage.width - 3,
+  y: 470,
+  image: platformImage
 })];
 var keys = {
   right: {
@@ -202,10 +235,13 @@ var scrollOffset = 0;
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  player.update();
+  genericObjects.forEach(function (genericObject) {
+    genericObject.draw();
+  });
   platforms.forEach(function (platform) {
     platform.draw();
   });
+  player.update();
   if (keys.right.pressed && player.position.x < 400) {
     player.velocity.x = 5;
   } else if (keys.left.pressed && player.position.x > 100) {
@@ -236,8 +272,8 @@ function animate() {
   }
 }
 animate();
-window.addEventListener('keydown', function (_ref2) {
-  var keyCode = _ref2.keyCode;
+window.addEventListener('keydown', function (_ref3) {
+  var keyCode = _ref3.keyCode;
   switch (keyCode) {
     case 65:
       console.log('left');
@@ -256,8 +292,8 @@ window.addEventListener('keydown', function (_ref2) {
       break;
   }
 });
-window.addEventListener('keyup', function (_ref3) {
-  var keyCode = _ref3.keyCode;
+window.addEventListener('keyup', function (_ref4) {
+  var keyCode = _ref4.keyCode;
   switch (keyCode) {
     case 65:
       console.log('left');

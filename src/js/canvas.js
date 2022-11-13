@@ -1,10 +1,11 @@
 // https://www.youtube.com/watch?v=4q2vvZn5aoo&ab_channel=ChrisCourses 1:08
 import platform from '../img/platform.png'
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+canvas.width = 1024
+canvas.height = 576
 
 const gravity = 0.25
 
@@ -49,21 +50,42 @@ class Platform {
             x,
             y
         }
-        this.width = 200
-        this. height = 20
         this.image = image
+        this.width = image.width
+        this.height = image.height
     }
 
     draw() {
         c.drawImage(this.image, this.position.x, this.position.y)
     }
 }
-const image = new Image()
-image.src = platform
-console.log(image)
-console.log(image.src)
+
+class GenericObject {
+    constructor({ x,y, image }) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = image
+        this.width = image.width
+        this.height = image.height
+    }
+
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
+function createImage(imageSrc) {
+    const image = new Image()
+    image.src = imageSrc
+    return image
+}
+
+const platformImage = createImage(platform)
+const genericObjects = [new GenericObject({x:0,y:0,image:createImage(platform)}), new GenericObject({x:0,y:0,image:createImage(platform)})]
 const player = new Player()
-const platforms = [new Platform({x:500, y:200, image}), new Platform({x:400, y:300, image })]
+const platforms = [new Platform({x:-1, y: 470, image:platformImage}), new Platform({x:platformImage.width - 3, y:470, image:platformImage })]
 const keys = {
     right: {
         pressed: false
@@ -78,10 +100,13 @@ let scrollOffset = 0
 function animate() {
     requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
-    player.update()
+    genericObjects.forEach(genericObject => {
+        genericObject.draw()
+    })
     platforms.forEach((platform) => {
         platform.draw()
     })
+    player.update()
 
     if (keys.right.pressed && player.position.x < 400) {
         player.velocity.x = 5
