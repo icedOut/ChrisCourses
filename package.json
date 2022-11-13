@@ -1,25 +1,27 @@
 {
-  "name": "icy2dgame",
+  "name": "canvas-template",
   "version": "1.0.0",
-  "description": "2D game with HTML CAVAS & Javascript",
-  "main": "index.js",
+  "description": "",
+  "main": "webpack.config.js",
   "scripts": {
-    "test": "test"
+    "dev": "webpack --config webpack.config.js",
+    "start": "webpack --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/icedOut/ChrisCourses.git"
-  },
-  "keywords": [
-    "Game",
-    "2D",
-    "platform",
-    "javascript"
-  ],
-  "author": "Philippe Chartrand",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/icedOut/ChrisCourses/issues"
-  },
-  "homepage": "https://github.com/icedOut/ChrisCourses#readme"
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "browser-sync": "^2.26.7",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.0.3",
+    "prettier": "^2.0.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
 }
